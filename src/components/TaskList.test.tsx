@@ -2,7 +2,10 @@ import * as React from "react";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import { TaskList } from "./TaskList";
-import { TaskItem } from "./TaskListItem";
+import {
+  makeRandomDateString,
+  makeRandomTaskText
+} from "../helpers/testHelpers";
 
 describe("TaskList", () => {
   // TODO: Step 4
@@ -14,18 +17,26 @@ describe("TaskList", () => {
 
   // TODO: Step 5
   it.skip("correctly renders a list of TaskItems when provided", async () => {
+    const randomDate1 = makeRandomDateString();
+    const randomDate2 = makeRandomDateString();
+    const randomTaskText1 = makeRandomTaskText();
+    const randomTaskText2 = makeRandomTaskText();
+
     render(
       <TaskList
-        tasks={
-          [
-            { title: "Task 1", date: new Date(2021, 1, 1) },
-            { title: "Task 2", date: new Date(2021, 1, 2) }
-          ] as TaskItem[]
-        }
+        tasks={[
+          { title: randomTaskText1, date: randomDate1 },
+          { title: randomTaskText2, date: randomDate2 }
+        ]}
       />
     );
 
-    expect(screen.getByText("Task 1")).toBeInTheDocument();
-    expect(screen.getByText("Task 2")).toBeInTheDocument();
+    expect(screen.getByText(randomTaskText1)).toBeInTheDocument();
+    expect(screen.getByText(randomDate1)).toBeInTheDocument();
+    expect(screen.getByText(randomTaskText1)).toBeInTheDocument();
+    expect(screen.getByText(randomDate2)).toBeInTheDocument();
+    expect(
+      screen.getByText("No tasks have been added yet.")
+    ).not.toBeInTheDocument();
   });
 });

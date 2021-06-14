@@ -3,10 +3,10 @@ import { TaskItem } from "./TaskListItem";
 
 type Props = {
   onSubmit: (taskItem: TaskItem) => void;
-  onCancel: () => void;
+  closeModal: () => void;
 };
 
-export const AddTaskModal: React.FC<Props> = ({ onSubmit, onCancel }) => {
+export const AddTaskModal: React.FC<Props> = ({ onSubmit, closeModal }) => {
   const onSubmitHandler = () => {};
 
   const onCancelHandler = () => {};

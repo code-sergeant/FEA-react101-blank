@@ -5,18 +5,24 @@ import { AddTaskModal } from "./AddTaskModal";
 import "@testing-library/jest-dom/extend-expect";
 
 describe("Add Task Modal", () => {
-  let mockOnClick: () => void;
-  let mockOnCancel: () => void;
+  let mockOnSubmit: () => void;
+  let mockCloseModal: () => void;
   beforeEach(() => {
-    mockOnClick = jest.fn();
-    mockOnCancel = jest.fn();
-    render(<AddTaskModal onSubmit={mockOnClick} onCancel={mockOnCancel} />);
+    mockOnSubmit = jest.fn();
+    mockCloseModal = jest.fn();
+    render(
+      <AddTaskModal onSubmit={mockOnSubmit} closeModal={mockCloseModal} />
+    );
   });
 
   // TODO: Step 6
-  it.skip("renders the task title input field", () => {
-    expect(screen.getByLabelText("Task Title"));
-    expect(screen.getByRole("input", { name: "Task Title" }));
+  it.skip("allows a user to fill in a task title in the Task Title input", () => {
+    const inputElement = screen.getByLabelText(
+      "Task Title"
+    ) as HTMLInputElement;
+
+    userEvent.type(inputElement, "Testing");
+    expect(inputElement).toHaveValue("Testing");
   });
 
   // TODO: Step 7
@@ -42,7 +48,7 @@ describe("Add Task Modal", () => {
     userEvent.type(titleInput, "Test Title");
     userEvent.click(screen.getByText("Submit"));
 
-    expect(mockOnClick).toHaveBeenCalledWith({
+    expect(mockOnSubmit).toHaveBeenCalledWith({
       title: "Test Title",
       date: new Date().toDateString()
     });
@@ -53,17 +59,16 @@ describe("Add Task Modal", () => {
     const titleInput = screen.getByLabelText("Task Title") as HTMLInputElement;
 
     userEvent.type(titleInput, "Test Title");
-
     userEvent.click(screen.getByText("Submit"));
 
     expect(titleInput.value).toEqual("");
   });
 
   // TODO: Step 11
-  it.skip("calls onCancel when 'Cancel' button is clicked", () => {
+  it.skip("calls closeModal when the 'Cancel' button is clicked", () => {
     userEvent.click(screen.getByText("Cancel"));
 
-    waitFor(() => expect(mockOnCancel).toHaveBeenCalled());
+    waitFor(() => expect(mockCloseModal).toHaveBeenCalled());
   });
 
   describe("Keyboard Shortcuts", () => {
@@ -74,7 +79,6 @@ describe("Add Task Modal", () => {
       ) as HTMLInputElement;
 
       userEvent.type(titleInput, "Test Title");
-
       userEvent.type(titleInput, "{enter}");
 
       expect(titleInput.value).toEqual("");
@@ -91,7 +95,7 @@ describe("Add Task Modal", () => {
     it.skip("calls onCancel when user presses Escape", () => {
       userEvent.type(screen.getByLabelText("Task Title"), "{escape}");
 
-      waitFor(() => expect(mockOnCancel).toHaveBeenCalled());
+      waitFor(() => expect(mockCloseModal).toHaveBeenCalled());
     });
   });
 });
