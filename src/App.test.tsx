@@ -13,7 +13,7 @@ describe("App", () => {
     expect(screen.getByText("Task Tracker"));
   });
 
-  describe("AddTaskModal", () => {
+  describe("Conditional rendering", () => {
     // TODO: Step 12
     it.skip("hides the `Add Task` button when 'Add Task' is clicked", () => {
       userEvent.click(screen.getByText("Add Task"));
@@ -47,33 +47,6 @@ describe("App", () => {
       userEvent.click(screen.getByText("Submit"));
 
       expect(screen.getByText("AddedTask1")).toBeInTheDocument();
-    });
-
-    // TODO: Step 16
-    it.skip("should successfully delete the correct task from the list", async () => {
-      userEvent.click(screen.getByText("Add Task"));
-      userEvent.type(screen.getByLabelText("Task Title"), "AddedTask1");
-      userEvent.click(screen.getByText("Submit"));
-      userEvent.click(screen.getByText("Add Task"));
-      userEvent.type(screen.getByLabelText("Task Title"), "AddedTask2");
-      userEvent.click(screen.getByText("Submit"));
-      userEvent.click(screen.getByText("Add Task"));
-      userEvent.type(screen.getByLabelText("Task Title"), "AddedTask3");
-      userEvent.click(screen.getByText("Submit"));
-
-      expect(await screen.findByText("AddedTask1"));
-      expect(await screen.findByText("AddedTask2"));
-      expect(await screen.findByText("AddedTask3"));
-
-      const addedTask2Button = (
-        await screen.findAllByText("Delete")
-      )[1] as HTMLButtonElement;
-
-      userEvent.click(addedTask2Button);
-
-      expect(await screen.findByText("AddedTask1")).toBeInTheDocument();
-      expect(await screen.findByText("AddedTask3")).toBeInTheDocument();
-      expect(await screen.queryByText("AddedTask2")).not.toBeInTheDocument();
     });
   });
 });

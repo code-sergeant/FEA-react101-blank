@@ -12,6 +12,7 @@ describe("TaskListItem", () => {
   it.skip("correctly renders a Task List Item", () => {
     const randomDate = makeRandomDateString();
     const randomTaskText = makeRandomTaskText();
+
     render(<TaskListItem title="Task 1" date={randomDate} />);
 
     expect(screen.getByText(randomTaskText));

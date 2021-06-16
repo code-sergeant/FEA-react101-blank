@@ -7,11 +7,8 @@ type Props = {
 };
 
 export const AddTaskModal: React.FC<Props> = ({ onSubmit, closeModal }) => {
-  const onSubmitHandler = () => {};
-
+  const onClickHandler = () => {};
   const onCancelHandler = () => {};
-
-  const onKeyHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {};
 
   return <></>;
 };

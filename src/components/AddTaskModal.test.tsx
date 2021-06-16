@@ -7,6 +7,7 @@ import "@testing-library/jest-dom/extend-expect";
 describe("Add Task Modal", () => {
   let mockOnSubmit: () => void;
   let mockCloseModal: () => void;
+
   beforeEach(() => {
     mockOnSubmit = jest.fn();
     mockCloseModal = jest.fn();
@@ -32,6 +33,7 @@ describe("Add Task Modal", () => {
 
     expect(screen.getByText("Submit")).toBeDisabled();
   });
+
   // TODO: Step 8
   it.skip("enables submit button if required fields are provided", () => {
     const titleInput = screen.getByLabelText("Task Title") as HTMLInputElement;
@@ -70,33 +72,5 @@ describe("Add Task Modal", () => {
     userEvent.click(screen.getByText("Cancel"));
 
     waitFor(() => expect(mockCloseModal).toHaveBeenCalled());
-  });
-
-  describe("Keyboard Shortcuts", () => {
-    // TODO: Step 17
-    it.skip("clears the task title field when user submits using the enter key", () => {
-      const titleInput = screen.getByLabelText(
-        "Task Title"
-      ) as HTMLInputElement;
-
-      userEvent.type(titleInput, "Test Title");
-      userEvent.type(titleInput, "{enter}");
-
-      expect(titleInput.value).toEqual("");
-    });
-
-    // TODO: Step 18
-    it.skip("displays an error message if user presses Enter while required fields are empty", () => {
-      userEvent.type(screen.getByLabelText("Task Title"), "{enter}");
-
-      expect(screen.getByText("Please enter a title."));
-    });
-
-    // TODO: Step 19
-    it.skip("calls closeModal when user presses Escape", () => {
-      userEvent.type(screen.getByLabelText("Task Title"), "{escape}");
-
-      waitFor(() => expect(mockCloseModal).toHaveBeenCalled());
-    });
   });
 });
