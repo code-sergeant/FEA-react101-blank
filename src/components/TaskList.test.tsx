@@ -36,7 +36,7 @@ describe("TaskList", () => {
     expect(screen.getByText(randomTaskText1)).toBeInTheDocument();
     expect(screen.getByText(randomDate2)).toBeInTheDocument();
     expect(
-      screen.getByText("No tasks have been added yet.")
+      screen.queryByText("No tasks have been added yet.")
     ).not.toBeInTheDocument();
   });
 });
