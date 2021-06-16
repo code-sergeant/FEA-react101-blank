@@ -22,6 +22,7 @@ describe("Add Task Modal", () => {
     ) as HTMLInputElement;
 
     userEvent.type(inputElement, "Testing");
+
     expect(inputElement).toHaveValue("Testing");
   });
 
@@ -92,7 +93,7 @@ describe("Add Task Modal", () => {
     });
 
     // TODO: Step 19
-    it.skip("calls onCancel when user presses Escape", () => {
+    it.skip("calls closeModal when user presses Escape", () => {
       userEvent.type(screen.getByLabelText("Task Title"), "{escape}");
 
       waitFor(() => expect(mockCloseModal).toHaveBeenCalled());
