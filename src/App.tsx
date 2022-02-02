@@ -6,5 +6,5 @@ import "./styles.css";
 export default function App() {
   const addTaskHandler = (taskItem: TaskItem) => {};
 
-  return <div className="App"></div>;
+  return <div className="App">Task Tracker</div>;
 }

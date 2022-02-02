@@ -9,7 +9,7 @@ describe("App", () => {
   });
 
   // TODO: Step 1
-  it.skip("renders the app name", () => {
+  it("renders the app name", () => {
     expect(screen.getByText("Task Tracker"));
   });
 
